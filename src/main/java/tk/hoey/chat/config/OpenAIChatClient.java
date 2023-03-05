@@ -33,6 +33,7 @@ public class OpenAIChatClient {
     private final Gson gson = new Gson();
 
     public String sendMessage(String message) throws IOException {
+        log.info("OpenAPI Key:{}", key);
         log.info("发送请求:{}", message);
         HttpClient httpClient = HttpClientBuilder.create().build();
 
@@ -50,6 +51,7 @@ public class OpenAIChatClient {
         HttpPost request = new HttpPost(endPoint);
         request.setHeader("Content-Type", "application/json");
         request.setHeader("Authorization", "Bearer " + key);
+        request.setHeader("OpenAI-Organization","org-GsVbOCv8stRYZ7uOCbPBbwDN");
         request.setEntity(new StringEntity(gson.toJson(requestBody), ContentType.APPLICATION_JSON));
 
         String responseString = httpClient.execute(request, httpResponse -> {
@@ -61,8 +63,15 @@ public class OpenAIChatClient {
             }
         });
 
-        JsonObject responseBody = JsonParser.parseString(responseString).getAsJsonObject();
-        JsonObject messageObject1 = responseBody.getAsJsonArray("choices").get(0).getAsJsonObject().get("message").getAsJsonObject();
-        return messageObject1.get("content").getAsString();
+        String content = "我好像出现问题了，请联系我的管理员进行查看！";
+        try{
+            JsonObject responseBody = JsonParser.parseString(responseString).getAsJsonObject();
+            JsonObject messageObject1 = responseBody.getAsJsonArray("choices").get(0).getAsJsonObject().get("message").getAsJsonObject();
+            content = messageObject1.get("content").getAsString();
+        }catch (NullPointerException e){
+            log.error("从API获取数据失败，错误信息为:" + e);
+        }
+//        System.out.println(content);
+        return content;
     }
 }
