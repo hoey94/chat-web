@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Chat Demo</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+<div id="chatbox"></div>
+<input type="text" id="chatInput" name="message" placeholder="Type your message here...">
+<button type="button" id="sendBtn" onclick="sendMeg()">Send</button>
+<script>
+    var socket = new WebSocket("ws://" + location.host + "/chat");
+
+    socket.onopen = function(event) {
+        $('#chatbox').append('<p>Welcome to the chat room!</p>');
+    };
+
+    socket.onmessage = function(event) {
+        $('#chatbox').append('<p>' + event.data + '</p>');
+    };
+
+    function sendMeg(){
+        console.log('click');
+        var message = $('#chatInput').val();
+        $('#chatbox').append('<p>' + message + '</p>');
+        $('#chatInput').val('');
+        socket.send(message);
+    }
+
+    // 监听输入框的 keyup 事件
+    $(document).on('keydown', function(event) {
+        console.log('keydown');
+        // 如果按下的是回车键（keyCode 为 13），则触发按钮点击事件
+        if (event.keyCode === 13) {
+            console.log(13);
+            sendMeg();
+        }
+    });
+</script>
+</body>
+</html>
