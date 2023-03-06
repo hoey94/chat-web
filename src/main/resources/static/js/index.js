@@ -21,6 +21,7 @@ setInterval(function () {
 
 socket.onopen = function (event) {
     $('#chatbox').append(getWelComeContent());
+    initQrcode();
 };
 
 socket.onmessage = function (event) {
@@ -78,7 +79,7 @@ function getChatContent(data) {
     html += '</div>'
     html += '<div class="chat-message-content">'
     html += '<span>' + chatbotName + '&nbsp;&nbsp;' + getCurrentDate() + '</span>'
-    html += '<p>' + data + '</p>'
+    html += '<p>' + marked.parse(data) + '</p>'
     html += '</div>'
     html += '</div>'
     return html;

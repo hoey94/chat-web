@@ -1,0 +1,27 @@
+
+.reward-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.reward-info {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-130%, 0);
+    max-width: 200px;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.2s linear;
+}
+
+.reward-logo:hover + .reward-info {
+    visibility: visible;
+    opacity: 1;
+}
+.reward-code{
+    max-width: 100px;
+}
+.reward-logo{
+    max-width: 25px;
+}
