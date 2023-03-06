@@ -1,12 +1,23 @@
 let lastClickTime = 0;
 // 间隔时间10秒
 let intervalTime = 1000 * 10;
-
 var chatbotPic = "./assert/chatbot.png";
 var chatbotName = "GPT-3.5";
 var userPic = "./assert/user.svg";
 var userName = "小可爱";
 var socket = new WebSocket("ws://" + location.host + "/chat");
+
+
+// window.addEventListener("load", setDocumentHeight);
+
+setInterval(function () {
+    if (socket.readyState === WebSocket.OPEN) {
+        console.log('websocket is open');
+    }else{
+        console.log('websocket is not open, reconnect...');
+        socket = new WebSocket("ws://" + location.host + "/chat");
+    }
+}, 5000);
 
 socket.onopen = function (event) {
     $('#chatbox').append(getWelComeContent());
@@ -135,3 +146,25 @@ function getCurrentDate() {
     const ampm = isAM ? '上午' : '下午';
     return `${month}月${day}日 ${ampm}${hour}:${minute}`;
 }
+
+// 动态设置页面高度，修正滚动条bug
+// function setDocumentHeight() {
+//     const body = document.body;
+//     const html = document.documentElement;
+//     const height = Math.max(
+//         body.scrollHeight,
+//         body.offsetHeight,
+//         html.clientHeight,
+//         html.scrollHeight,
+//         html.offsetHeight
+//     );
+//     console.log("set height" + height)
+//     alert(body.scrollHeight)
+//     alert(body.offsetHeight)
+//     alert(body.clientHeight)
+//     alert(html.clientHeight)
+//     alert(html.scrollHeight)
+//     alert(html.offsetHeight)
+//     // $("#chatbox").css("min-height", height + "px");
+//     $("#chatbox").css("max-height","100vh");
+// }
