@@ -61,8 +61,7 @@ $(document).on('keydown', function (event) {
 function checkIntervalTime() {
     var flag = true;
     const currentTime = new Date().getTime();
-    if (currentTime - lastClickTime < intervalTime) {
-        console.log('请不要频繁点击提交按钮。');
+    if (lastClickTime!=0 || currentTime - lastClickTime < intervalTime) {
         flag = true;
     } else {
         flag = false;
