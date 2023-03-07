@@ -1,52 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/atom-one-dark.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+  <meta charset="UTF-8">
+  <title>拖动浮动框</title>
+  <style>
+    /*.floating-box {*/
+    /*  position: absolute;*/
+    /*  top: 50px;*/
+    /*  left: 50px;*/
+    /*  width: 100px;*/
+    /*  height: 100px;*/
+    /*  border: 1px solid black;*/
+    /*  cursor: move;*/
+    /*}*/
 
-    <script>hljs.highlightAll();</script>
+    /*#logo {*/
+    /*  width: 50px;*/
+    /*  height: 50px;*/
+    /*  background-color: blue;*/
+    /*}*/
+  </style>
 </head>
 <body>
+<div class="floating-box">
+  <div id="logo"></div>
+</div>
 
-<pre>
-	<code class="language-java">
-  {
-    //实用之处①：限制访问(get)与修改(set)
-    let user = "visitor";
-    let person = {
-      firstName: "Hello",
-      lastName: "World",
-      get fullName() {
-        if(user === "visitor") {
-          alert("Access Denied!");
-          return ;
-        }
-        return this.firstName + " " + this.lastName;
-      },
-      set fullName(value) {
-        if(value.length < 6) {
-          alert("The value is too short!");
-          return;
-        }
-        [this.firstName, this.lastName] = value.split(" ");
-      }
+<script>
+  var box = document.querySelector(".floating-box");
+  var isDragging = false;
+  var mouseOffset = { x: 0, y: 0 };
+
+  box.addEventListener("mousedown", function(event) {
+    isDragging = true;
+    mouseOffset.x = event.clientX - box.offsetLeft;
+    mouseOffset.y = event.clientY - box.offsetTop;
+  });
+
+  box.addEventListener("mouseup", function(event) {
+    isDragging = false;
+  });
+
+  box.addEventListener("mousemove", function(event) {
+    if (isDragging) {
+      box.style.left = (event.clientX - mouseOffset.x) + "px";
+      box.style.top = (event.clientY - mouseOffset.y) + "px";
     }
-
-    console.log("------------------------ 6 ------------------------");
-    console.log(person.fullName);//alert("Access Denied!");
-    user = "admin";
-    console.log(person.fullName);//Hello World
-    person.fullName = "123";
-    console.log(person.fullName);//alert("The value is too short!");
-    person.fullName = "Captain America";
-    console.log(person.fullName);//Captain America
-  }
-
-	</code>
-</pre>
-
+  });
+</script>
 </body>
 </html>
