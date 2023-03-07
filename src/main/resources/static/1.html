@@ -1,19 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>JavaScript Password Prompt</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="./css/QRCode.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+
+    <script>hljs.highlightAll();</script>
 </head>
 <body>
-<!-- HTML -->
-<div class="reward-wrapper">
-    <img src="assert/qrcode1.png" class="reward-logo">
-    <div class="reward-info">
-        <img src="assert/qrcode.png" class="reward-code">
-    </div>
-</div>
 
-<script type="text/javascript" src="./js/QRCode.js"></script>
+<pre>
+	<code class="language-java">
+  {
+    //实用之处①：限制访问(get)与修改(set)
+    let user = "visitor";
+    let person = {
+      firstName: "Hello",
+      lastName: "World",
+      get fullName() {
+        if(user === "visitor") {
+          alert("Access Denied!");
+          return ;
+        }
+        return this.firstName + " " + this.lastName;
+      },
+      set fullName(value) {
+        if(value.length < 6) {
+          alert("The value is too short!");
+          return;
+        }
+        [this.firstName, this.lastName] = value.split(" ");
+      }
+    }
+
+    console.log("------------------------ 6 ------------------------");
+    console.log(person.fullName);//alert("Access Denied!");
+    user = "admin";
+    console.log(person.fullName);//Hello World
+    person.fullName = "123";
+    console.log(person.fullName);//alert("The value is too short!");
+    person.fullName = "Captain America";
+    console.log(person.fullName);//Captain America
+  }
+
+	</code>
+</pre>
+
 </body>
 </html>

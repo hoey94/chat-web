@@ -11,6 +11,7 @@
 <!--    <link rel="stylesheet" href="./css/QRCode.css">-->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="./css/float.css">
 
     <script>
         var _hmt = _hmt || [];
@@ -26,7 +27,7 @@
 <body>
 <div class="chat-container">
     <div class="chat-header">
-        <h6>ChatGPT-仅供学习交流严禁使用于任何商业用途</h6>
+        <h6>GPT-3.5 TEST</h6>
         <i class="material-icons">
 <!--            <div class="reward-wrapper">-->
 <!--                <img src="assert/qrcode1.png" class="reward-logo">-->
@@ -45,9 +46,14 @@
         <input id="chatInput" name="message" type="text" placeholder="请输入...">
         <i id="sendBtn" onclick="sendMeg()" class="material-icons">send</i>
     </div>
+
+    <div class="floating-box">
+        <div id="logo"></div>
+    </div>
 </div>
 
 <script type="text/javascript" src="./js/index.js"></script>
+<script type="text/javascript" src="./js/float.js"></script>
 <!--<script type="text/javascript" src="./js/QRCode.js"></script>-->
 
 </body>

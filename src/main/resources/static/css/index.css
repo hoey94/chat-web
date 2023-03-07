@@ -102,6 +102,7 @@ body {
 }
 
 .chat-input input[type="text"] {
+    height: 1.5em;
     width: 90%;
     border: none;
     outline: none;
@@ -115,4 +116,8 @@ body {
     font-size: 20px !important;
     margin-left: 10px;
     cursor: pointer;
+}
+
+.material-icons{
+    color: #3498db;
 }

@@ -1,7 +1,7 @@
 let lastClickTime = 0;
 // 间隔时间10秒
 let intervalTime = 1000 * 10;
-var chatbotPic = "./assert/chatbot.png";
+var chatbotPic = "./assert/chatgpt.png";
 var chatbotName = "GPT-3.5";
 var userPic = "./assert/user.svg";
 var userName = "小可爱";
@@ -21,7 +21,6 @@ setInterval(function () {
 
 socket.onopen = function (event) {
     $('#chatbox').append(getWelComeContent());
-    initQrcode();
 };
 
 socket.onmessage = function (event) {
