@@ -1,10 +1,8 @@
 package tk.hoey.chat.config;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import lombok.Data;
 import lombok.extern.log4j.Log4j2;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.HttpClient;

@@ -36,3 +36,20 @@ box.addEventListener("mousemove", function(event) {
         box.style.top = (event.clientY - mouseOffset.y) + "px";
     }
 });
+
+box.addEventListener("touchstart", function(event) {
+    isDragging = true;
+    mouseOffset.x = event.touches[0].clientX - box.offsetLeft;
+    mouseOffset.y = event.touches[0].clientY - box.offsetTop;
+});
+
+box.addEventListener("touchend", function(event) {
+    isDragging = false;
+});
+
+box.addEventListener("touchmove", function(event) {
+    if (isDragging) {
+        box.style.left = (event.touches[0].clientX - mouseOffset.x) + "px";
+        box.style.top = (event.touches[0].clientY - mouseOffset.y) + "px";
+    }
+});
