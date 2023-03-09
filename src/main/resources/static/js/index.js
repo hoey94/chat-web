@@ -5,28 +5,6 @@ var chatbotPic = "./assert/chatgpt.png";
 var chatbotName = "GPT-3.5";
 var userPic = "./assert/user.svg";
 var userName = "小可爱";
-var socket = new WebSocket("ws://" + location.host + "/chat");
-
-
-// window.addEventListener("load", setDocumentHeight);
-
-setInterval(function () {
-    if (socket.readyState === WebSocket.OPEN) {
-        console.log('websocket is open');
-    }else{
-        console.log('websocket is not open, reconnect...');
-        socket = new WebSocket("ws://" + location.host + "/chat");
-    }
-}, 5000);
-
-socket.onopen = function (event) {
-    $('#chatbox').append(getWelComeContent());
-};
-
-socket.onmessage = function (event) {
-    $('#chatbox').append(getChatContent(event.data));
-    lastClickTime = 0;
-};
 
 function sendMeg() {
     // console.log('click');
@@ -146,6 +124,7 @@ function getCurrentDate() {
     return `${month}月${day}日 ${ampm}${hour}:${minute}`;
 }
 
+// window.addEventListener("load", setDocumentHeight);
 // 动态设置页面高度，修正滚动条bug
 // function setDocumentHeight() {
 //     const body = document.body;
