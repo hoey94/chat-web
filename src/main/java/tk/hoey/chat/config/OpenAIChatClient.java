@@ -25,9 +25,12 @@ public class OpenAIChatClient {
 
     @Value("${chat.key}")
     private String key;
+    @Value("${chat.organization.key}")
+    private String organKey;
     @Value("${chat.server.url}")
     private String endPoint;
 
+    private String defaulModel = "gpt-3.5-turbo";
     private final Gson gson = new Gson();
 
     public String sendMessage(String message) throws IOException {
@@ -36,7 +39,7 @@ public class OpenAIChatClient {
         HttpClient httpClient = HttpClientBuilder.create().build();
 
         JsonObject requestBody = new JsonObject();
-        requestBody.addProperty("model", "gpt-3.5-turbo");
+        requestBody.addProperty("model", defaulModel);
 
         JsonObject messageObject = new JsonObject();
         messageObject.addProperty("role", "user");
@@ -49,7 +52,7 @@ public class OpenAIChatClient {
         HttpPost request = new HttpPost(endPoint);
         request.setHeader("Content-Type", "application/json");
         request.setHeader("Authorization", "Bearer " + key);
-        request.setHeader("OpenAI-Organization","org-GsVbOCv8stRYZ7uOCbPBbwDN");
+        request.setHeader("OpenAI-Organization",organKey);
         request.setEntity(new StringEntity(gson.toJson(requestBody), ContentType.APPLICATION_JSON));
 
         String responseString = httpClient.execute(request, httpResponse -> {
